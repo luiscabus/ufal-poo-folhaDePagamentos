@@ -1,0 +1,54 @@
+//javac -d /projects/poo_baldoino/bin/ Main.java
+//javac -d /projects/poo_baldoino/bin/ *.java
+//javac -d /projects/poo_baldoino/bin/ /projects/poo_baldoino/src/Main.java
+//java Main /projects/poo_baldoino/bin/Main.class
+//https://www.caelum.com.br/apostila-java-orientacao-objetos/orientacao-a-objetos-basica/#exerccios-orientao-a-objetos
+
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) {
+        // write your code here
+        System.out.println("Hello World!");
+        System.out.println("Este sistema é uma folha de pagamentos!");
+
+        ListaDeEmpregados meusEmpregados = new ListaDeEmpregados();
+
+        int index;
+        try (Scanner scanner = new Scanner(System.in)) {
+            do {
+                System.out.print("O que você deseja fazer?:\n");
+                System.out.print("1- Adição de empregado:\n");
+                System.out.print("2- Remoção de empregado:\n");
+                System.out.print("3- Lançar um Cartão de Ponto:\n");
+                System.out.print("4- Lançar um Resultado Venda:\n");
+                System.out.print("5- Lançar uma taxa de serviço:\n");
+                System.out.print("6- Alterar detalhes de um empregado:\n");
+                System.out.print("7- Rodar a folha de pagamento para hoje:\n");
+                System.out.print("8- Undo:\n");
+                System.out.print("9- Redo:\n");
+                System.out.print("10- Agenda de Pagamento:\n");
+                System.out.print("11- Criação de Novas Agendas de Pagamento?:\n");
+                System.out.print("99- SAIR:\n");
+                index = scanner.nextInt();
+                System.out.println("Sua escolha foi: " + index + "\t");
+
+                if (index == 1) {
+
+                    Empregado novoEmpregado = new Empregado();
+                    
+
+                    meusEmpregados.AdicionarEmpregado(novoEmpregado);
+
+                }
+
+            } while (index != 99);
+        } catch (Exception e) {
+            e.printStackTrace(System.err);
+        }
+
+
+
+    }
+}
