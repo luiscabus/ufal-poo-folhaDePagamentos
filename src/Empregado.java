@@ -23,16 +23,16 @@ public class Empregado {
         this.comissao = comissao;
     }
 
-    public void PerguntarDados (Empregado n) {
+    public void PerguntarDados () {
 
         System.out.print("Entre com o nome do empregado:\n");
         try (Scanner scanner = new Scanner(System.in)) {
-            n.SetEmpregadoNome(scanner.nextLine());
-//            System.out.println("Novo empregado: " + novoEmpregado.nome);
+            this.SetEmpregadoNome(scanner.nextLine());
+            scanner.nextLine();
+            System.out.println("Novo empregado: " + this.nome);
         } catch (Exception e) {
             e.printStackTrace(System.err);
         }
-
 
 
     }

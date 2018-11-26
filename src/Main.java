@@ -1,7 +1,5 @@
-//javac -d /projects/poo_baldoino/bin/ Main.java
-//javac -d /projects/poo_baldoino/bin/ *.java
-//javac -d /projects/poo_baldoino/bin/ /projects/poo_baldoino/src/Main.java
-//java Main /projects/poo_baldoino/bin/Main.class
+//javac -d /projects/folhaDePagamentos/bin/ /projects/folhaDePagamentos/src/*.java
+//java Main /projects/folhaDePagamentos/bin/Main.class
 //https://www.caelum.com.br/apostila-java-orientacao-objetos/orientacao-a-objetos-basica/#exerccios-orientao-a-objetos
 
 import java.util.*;
@@ -31,16 +29,15 @@ public class Main {
                 System.out.print("10- Agenda de Pagamento:\n");
                 System.out.print("11- Criação de Novas Agendas de Pagamento?:\n");
                 System.out.print("99- SAIR:\n");
+                
                 index = scanner.nextInt();
                 System.out.println("Sua escolha foi: " + index + "\t");
 
                 if (index == 1) {
-
+//                    Empregado novoEmpregado = new Empregado();
+//                    Empregado novoEmpregado = new Empregado("Luís", "Rua do Zero", 0, 0, 0, 0);
                     Empregado novoEmpregado = new Empregado();
-                    
-
-                    meusEmpregados.AdicionarEmpregado(novoEmpregado);
-
+                    novoEmpregado.PerguntarDados();
                 }
 
             } while (index != 99);

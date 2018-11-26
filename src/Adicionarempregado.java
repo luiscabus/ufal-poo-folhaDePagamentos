@@ -3,7 +3,7 @@ import java.util.*;
 
 public class Adicionarempregado {
     
-    public Adicionarempregado () {
+    public Empregado AdicionarNovoEmpregado () {
         Empregado novoEmpregado;
         novoEmpregado = new Empregado();
         
@@ -14,6 +14,8 @@ public class Adicionarempregado {
         } catch (Exception e) {
             e.printStackTrace(System.err);
         }
+        
+        return novoEmpregado;
 
     }
     
