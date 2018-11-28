@@ -79,12 +79,16 @@ public class Empregado {
         this.SetEmpregadoPertenceSindicato(scanner.nextInt());
 
         if (this.pertenceSindicato == 1) {
-            System.out.print("Qual a taxa mensal cobrada pelo sindicato?\n");
+            System.out.print("Qual a taxa cobrada pelo sindicato a cada pagamento?\n");
             this.taxaSindicato = scanner.nextFloat();
         }
 
-        System.out.println("Novo empregado incluído: ID: " + novo_emp_id + ", Nome: " + this.nome + ", Endereço: " + this.endereco);
+        System.out.print("Como quer receber seu pagamento? (1 Cheque pelos correios, 2 Cheque em mãos, 3 Depósito na conta):\n");
+        this.SetEmpregadoMetodoPagamento(scanner.nextInt());
 
+        System.out.println("Novo empregado incluído: ID: " + novo_emp_id + ", Nome: " + this.nome + ", Endereço: " + this.endereco);
+    
+        scanner.close();
     }
 
     public void ExcluirEmpregado (ArrayList<Empregado> arrayEmpregados) {
@@ -104,6 +108,8 @@ public class Empregado {
         for (int i = 0; i < arrayEmpregados.size(); ++i) {
             System.out.printf("ID: %d, Nome: %s\n", i, arrayEmpregados.get(i).id, arrayEmpregados.get(i).nome);
         }
+        
+        scanner.close();
     }
 
     public void LancarCartaodePonto(ArrayList<Empregado> arrayEmpregados) {
@@ -130,7 +136,8 @@ public class Empregado {
             }
             arrayEmpregados.get(selecionado).salarioHoraAcumulado += salario_add;
         }
-
+        
+        scanner.close();
     }
 
     public void LancarVenda(ArrayList<Empregado> arrayEmpregados) {
@@ -149,6 +156,8 @@ public class Empregado {
             int entrada = scanner.nextInt();
             arrayEmpregados.get(selecionado).comissoesAcumuladas += entrada * arrayEmpregados.get(selecionado).comissao / 100;
         }
+        
+        scanner.close();
     }
 
     public void LancarTaxas(ArrayList<Empregado> arrayEmpregados) {
@@ -160,13 +169,15 @@ public class Empregado {
         Scanner scanner = new Scanner(System.in);
         int selecionado = scanner.nextInt();
 
-        if (arrayEmpregados.get(selecionado).tipo != 1) {
+        if (arrayEmpregados.get(selecionado).pertenceSindicato != 1) {
             System.out.println("Lascou, não pertence a sindicato");
         } else {
             System.out.printf("Qual o valor da taxa a ser lançada para o empregado %s?\n", arrayEmpregados.get(selecionado).nome);
             int entrada = scanner.nextInt();
             arrayEmpregados.get(selecionado).taxaSindAcumulado += entrada;
         }
+        
+        scanner.close();
     }
 
     public void GerarFolha(ArrayList<Empregado> arrayEmpregados) {
@@ -217,6 +228,9 @@ public class Empregado {
     }
     public void SetEmpregadoSalarioC(int comissao) {
         this.comissao = comissao;
+    }
+    public void SetEmpregadoMetodoPagamento(int metodo) {
+        this.metodoPagamento = metodo;
     }
     public void SetEmpregadoPertenceSindicato(int pertenceSindicato) {
         this.pertenceSindicato = pertenceSindicato;

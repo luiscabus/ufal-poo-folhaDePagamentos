@@ -178,9 +178,16 @@ public class Main {
                             break;
                     }
 
-                    String sindicalizado = (meusEmpregadosList.get(i).pertenceSindicato == 1) ? "Sim" : "Não";
+//                    String sindicalizado = (meusEmpregadosList.get(i).pertenceSindicato == 1) ? "Sim" : "Não";
 
                     float saldoLiquido = 0;
+
+                    if (meusEmpregadosList.get(i).tipoDeAgenda == 30) { // horistas -> todo dia
+                        temPagamento = true;
+                        saldoLiquido = meusEmpregadosList.get(i).salarioHoraAcumulado
+                                - meusEmpregadosList.get(i).taxaSindicato
+                                - meusEmpregadosList.get(i).taxaSindAcumulado;
+                    }
 
                     if (diasCorridos % 7 == 6 && meusEmpregadosList.get(i).tipoDeAgenda == 4) { // horistas -> sexta-feira
                         temPagamento = true;
@@ -281,7 +288,7 @@ public class Main {
             }
 
         } while (index != 99);
-
+        scanner.close();
 
 
     }
