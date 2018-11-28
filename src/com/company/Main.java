@@ -22,38 +22,44 @@ public class Main {
 
         emp_count+=1;
         Empregado novoEmp = null;
-        novoEmp = new Empregado(emp_count, "HH Horista", "HOR", 1, 12, 0, 0, 4, 3, 0, 0);
+        novoEmp = new Empregado(emp_count, "HH Horista", "HOR",
+                1, 12, 0, 0, 4, 3, 0, 0);
         meusEmpregadosList.add(novoEmp);
 
         emp_count+=1;
-        novoEmp = new Empregado(emp_count, "AA Assalariado", "ASS", 2, 0, 964, 0, 1, 3,0, 0);
+        novoEmp = new Empregado(emp_count, "AA Assalariado", "ASS",
+                2, 0, 964, 0, 1, 3,0, 0);
         meusEmpregadosList.add(novoEmp);
 
         emp_count+=1;
-        novoEmp = new Empregado(emp_count, "CC Comissionado", "COM", 3, 0, 600, 12, 2, 3, 0, 0);
+        novoEmp = new Empregado(emp_count, "CC Comissionado", "COM",
+                3, 0, 600, 12, 2, 3, 0, 0);
         meusEmpregadosList.add(novoEmp);
 
         emp_count+=1;
-        novoEmp = new Empregado(emp_count, "HORIST Sindical", "HOR SIN Endereço", 1, 12, 0, 0, 4, 1, 1, 7);
+        novoEmp = new Empregado(emp_count, "HORIST Sindical", "HOR SIN Endereço",
+                1, 12, 0, 0, 4, 1, 1, 7);
         meusEmpregadosList.add(novoEmp);
 
         emp_count+=1;
-        novoEmp = new Empregado(emp_count, "ASSALA Sindical", "ASS", 2, 0, 964, 0, 1, 3, 1, 8);
+        novoEmp = new Empregado(emp_count, "ASSALA Sindical", "ASS",
+                2, 0, 964, 0, 1, 3, 1, 8);
         meusEmpregadosList.add(novoEmp);
 
         // adicionar horas ao hh horista
-        meusEmpregadosList.get(0).salarioHoraAcumulado += meusEmpregadosList.get(0).salarioHora * 3;
-        meusEmpregadosList.get(0).salarioHoraAcumulado += meusEmpregadosList.get(0).salarioHora * 4;
+        meusEmpregadosList.get(0).salarioHoraAcumulado += meusEmpregadosList.get(0).salarioHora * 7;
 
-        // adicionar comissão ao comissionado
+        // adicionar comissões ao comissionado
         meusEmpregadosList.get(2).comissoesAcumuladas += meusEmpregadosList.get(2).comissao * 220.00 / 100.00;
         meusEmpregadosList.get(2).comissoesAcumuladas += meusEmpregadosList.get(2).comissao * 438.00 / 100.00;
 
-        // adicionar horas taxas ao horista sindicalizado
+        // adicionar horas e taxas ao horista sindicalizado
         meusEmpregadosList.get(3).salarioHoraAcumulado += meusEmpregadosList.get(3).salarioHora * 4;
         meusEmpregadosList.get(3).taxaSindAcumulado += 13;
-        meusEmpregadosList.get(3).taxaSindAcumulado += 10;
         meusEmpregadosList.get(3).taxaSindAcumulado += 16;
+
+        // adicionar taxas ao assalariado sindicalizado
+        meusEmpregadosList.get(4).taxaSindAcumulado += 31;
 
 
         int index = 0;
@@ -144,84 +150,77 @@ public class Main {
             }
 
             if (index == 7) {
-                System.out.println();System.out.println("# Folha de Pagamentos");
+                System.out.println();System.out.printf("# Folha de Pagamentos\n\n");
 
-                if (dia_de_hoje == 30) { // mensalistas
-                    for (int i = 0; i < meusEmpregadosList.size(); ++i) {
-                        if (meusEmpregadosList.get(i).tipoDeAgenda == 1) {
-                            if (meusEmpregadosList.get(i).tipo == 2) {
-                                System.out.println("=---");
-                                String formapagamento = "";
-                                if (meusEmpregadosList.get(i).metodoPagamento == 1) {
-                                    formapagamento = "Cheque pelos correios para o endereço: " + meusEmpregadosList.get(i).endereco;
-                                }
-                                if (meusEmpregadosList.get(i).metodoPagamento == 2) {
-                                    formapagamento = "Cheque entregue em mãos";
-                                }
-                                if (meusEmpregadosList.get(i).metodoPagamento == 3) {
-                                    formapagamento = "Depósito em conta bancária";
-                                }
+                for (int i = 0; i < meusEmpregadosList.size(); ++i) {
+                    boolean temPagamento = false;
 
-                                float saldoLiquido = meusEmpregadosList.get(i).salarioMes - meusEmpregadosList.get(i).taxaSindicato - meusEmpregadosList.get(i).taxaSindAcumulado;
-
-                                System.out.println("=---");
-                                System.out.printf("[%s]\n", meusEmpregadosList.get(i).nome);
-                                System.out.printf("Salário bruto [%.2f]\n", meusEmpregadosList.get(i).salarioHoraAcumulado);
-                                System.out.printf("- Desconto do Sindicato [%.2f]\n", meusEmpregadosList.get(i).taxaSindicato);
-                                System.out.printf("- Taxas do Sindicato [%.2f]\n", meusEmpregadosList.get(i).taxaSindAcumulado);
-                                System.out.printf("== Valor Líquido a Receber [%.2f]\n", saldoLiquido);System.out.println();
-                                System.out.printf("Realizar o pagamento na forma:\n[%s]\n", formapagamento);
-                                System.out.println("---=");
-
-                                meusEmpregadosList.get(i).taxaSindAcumulado = 0;
-                            }
-                        }
+                    String formapagamento = "";
+                    switch (meusEmpregadosList.get(i).metodoPagamento) {
+                        case 1:
+                            formapagamento = "Cheque pelos correios para o endereço: " + meusEmpregadosList.get(i).endereco;
+                            break;
+                        case 2:
+                            formapagamento = "Cheque entregue em mãos";
+                            break;
+                        case 3:
+                            formapagamento = "Depósito em conta bancária";
+                            break;
                     }
-                }
 
-                if (diasCorridos % 7 == 6) { //sexta-feira para horistas
-                    for (int i = 0; i < meusEmpregadosList.size(); ++i) {
-                        if (meusEmpregadosList.get(i).tipoDeAgenda == 4) {
-                            if (meusEmpregadosList.get(i).tipo == 1 ) { //horista
-
-                                String formapagamento = "";
-                                if (meusEmpregadosList.get(i).metodoPagamento == 1) {
-                                    formapagamento = "Cheque pelos correios para o endereço: " + meusEmpregadosList.get(i).endereco;
-                                }
-                                if (meusEmpregadosList.get(i).metodoPagamento == 2) {
-                                    formapagamento = "Cheque entregue em mãos";
-                                }
-                                if (meusEmpregadosList.get(i).metodoPagamento == 3) {
-                                    formapagamento = "Depósito em conta bancária";
-                                }
-
-                                float saldoLiquido = meusEmpregadosList.get(i).salarioHoraAcumulado - meusEmpregadosList.get(i).taxaSindicato - meusEmpregadosList.get(i).taxaSindAcumulado;
-
-                                System.out.println("=---");
-                                System.out.printf("[%s]\n", meusEmpregadosList.get(i).nome);
-                                System.out.printf("Salário bruto [%.2f]\n", meusEmpregadosList.get(i).salarioHoraAcumulado);
-                                System.out.printf("- Desconto do Sindicato [%.2f]\n", meusEmpregadosList.get(i).taxaSindicato);
-                                System.out.printf("- Taxas do Sindicato [%.2f]\n", meusEmpregadosList.get(i).taxaSindAcumulado);
-                                System.out.printf("== Valor Líquido a Receber [%.2f]\n", saldoLiquido);System.out.println();
-                                System.out.printf("Realizar o pagamento na forma:\n[%s]\n", formapagamento);
-                                System.out.println("---=");
-
-                                meusEmpregadosList.get(i).salarioHoraAcumulado = 0;
-                                meusEmpregadosList.get(i).taxaSindAcumulado = 0;
-                            }
-                        }
+                    float salarioMensalProporcional = 0;
+                    switch (meusEmpregadosList.get(i).tipo) {
+                        case 2:
+                            salarioMensalProporcional = meusEmpregadosList.get(i).salarioMes;
+                            break;
+                        case 3:
+                            salarioMensalProporcional = (meusEmpregadosList.get(i).salarioMes / 2);
+                            break;
                     }
-                }
 
+                    String sindicalizado = (meusEmpregadosList.get(i).pertenceSindicato == 1) ? "Sim" : "Não";
 
-                else if (dia_de_hoje == 30) {
+                    float saldoLiquido = 0;
 
-                    if (mes_de_hoje == 12) {
-                        mes_de_hoje = 1;
-                        ano_de_hoje++;
-                    } else {
-                        mes_de_hoje++;
+                    if (diasCorridos % 7 == 6 && meusEmpregadosList.get(i).tipoDeAgenda == 4) { // horistas -> sexta-feira
+                        temPagamento = true;
+                        saldoLiquido = meusEmpregadosList.get(i).salarioHoraAcumulado
+                                - meusEmpregadosList.get(i).taxaSindicato
+                                - meusEmpregadosList.get(i).taxaSindAcumulado;
                     }
+
+                    if ((dia_de_hoje == 15 || dia_de_hoje == 30) && meusEmpregadosList.get(i).tipoDeAgenda == 2) { // mensalistas comissionados -> 2x/mes
+                        temPagamento = true;
+                        saldoLiquido = (meusEmpregadosList.get(i).salarioMes / 2)
+                                + meusEmpregadosList.get(i).comissoesAcumuladas
+                                - meusEmpregadosList.get(i).taxaSindicato
+                                - meusEmpregadosList.get(i).taxaSindAcumulado;
+                    }
+
+                    if (dia_de_hoje == 30 && meusEmpregadosList.get(i).tipoDeAgenda == 1) { // mensalistas -> 1x/mes
+                        temPagamento = true;
+                        saldoLiquido = meusEmpregadosList.get(i).salarioMes
+                                - meusEmpregadosList.get(i).taxaSindicato
+                                - meusEmpregadosList.get(i).taxaSindAcumulado;
+                    }
+
+                    if (temPagamento) {
+                        System.out.printf("---=--- início item %d\n", i);
+                        System.out.printf("[%s]\n", meusEmpregadosList.get(i).nome);
+                        System.out.printf("   [%.2f] Salário mensal proporcional\n", salarioMensalProporcional);
+                        System.out.printf(" + [%.2f] Horas \n", meusEmpregadosList.get(i).salarioHoraAcumulado);
+                        System.out.printf(" + [%.2f] Comissões \n", meusEmpregadosList.get(i).comissoesAcumuladas);
+                        System.out.printf(" - [%.2f] Desconto do Sindicato \n", meusEmpregadosList.get(i).taxaSindicato);
+                        System.out.printf(" - [%.2f] Taxas do Sindicato \n", meusEmpregadosList.get(i).taxaSindAcumulado);
+                        System.out.printf("== [%.2f] Valor Líquido a Receber \n", saldoLiquido);
+                        System.out.printf("** Pagamento na forma:\n   [%s]\n", formapagamento);
+                        System.out.printf("---=--- fim item %d\n\n", i);
+
+                        meusEmpregadosList.get(i).salarioHoraAcumulado = 0;
+                        meusEmpregadosList.get(i).comissoesAcumuladas = 0;
+                        meusEmpregadosList.get(i).taxaSindAcumulado = 0;
+                    }
+
                 }
 
 
