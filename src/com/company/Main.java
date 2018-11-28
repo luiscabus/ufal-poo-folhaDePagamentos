@@ -1,4 +1,4 @@
-
+package com.company;
 
 //javac -d /projects/folhaDePagamentos/bin/ /projects/folhaDePagamentos/src/*.java
 //java Main /projects/folhaDePagamentos/bin/Main.class
@@ -84,7 +84,7 @@ public class Main {
                     break;
             }
 
-            
+
 
             System.out.printf("### ---- DIA DE HOJE: %d/%d/%d -- %s ---- ###    ", dia_de_hoje, mes_de_hoje, ano_de_hoje, diaDaSemana);
             System.out.printf("Esta é a gambiarra de uma folha de pagamentos!\n\n");
